@@ -22,6 +22,3 @@
 - Make sure you register to use the app.
 ## Frontend
 - Run `npm install` and `npm run build`.
-
-## Note
-- Both frontend and backend code can be found in the backend folder
