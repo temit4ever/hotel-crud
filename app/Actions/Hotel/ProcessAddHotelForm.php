@@ -38,10 +38,8 @@ class ProcessAddHotelForm
                 'latitude' => $cord['lng'],
             ]);
 
-
             $fileName = Str::random() .'.' . ($data['hotelImage'])->getClientOriginalExtension();
             Storage::disk('public')->putFileAs("images/hotels/$hotel->id", $data['hotelImage'], $fileName);
-
             $hotel->image = asset("storage/images/hotels/{$hotel->id}/{$fileName}");
             $hotel->save();
 

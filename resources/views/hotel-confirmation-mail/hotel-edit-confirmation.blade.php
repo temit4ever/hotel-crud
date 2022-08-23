@@ -1,5 +1,5 @@
 @component('mail::message')
-    # Hotel Edited Confirmation
+    # Hotel Update Confirmation
 
     There has been an action perform on this item with id: {{$hotel->id}} details are below:
     Name: {{$hotel->hotel_name}}

@@ -57,9 +57,10 @@ class ProcessEditHotelForm
                     'latitude' => $cord['lng'],
                 ]);
             }
+            // Dispatch event
             HotelEdited::dispatch($hotelData);
-
             return ['message' => 'Hotel details updated successfully'];
+
         } catch (Exception $exception) {
             Log::error($exception);
         }
