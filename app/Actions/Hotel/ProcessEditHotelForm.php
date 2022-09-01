@@ -3,6 +3,7 @@
 namespace App\Actions\Hotel;
 
 use App\Events\HotelEdited;
+use App\Exceptions\HotelNotFoundException;
 use App\GeoLocation\Coordinates;
 use App\ValidationRules\HotelValidationRules;
 use App\Models\Hotel;
@@ -42,7 +43,7 @@ class ProcessEditHotelForm
                         }
                     }
 
-                    $fileName = Str::random() .'.' . ($data['hotelImage'])->getClientOriginalExtension();
+                    $fileName = $data['hotelImage']->hashName();;
                     Storage::disk('public')->putFileAs("images/hotels/$id", $data['hotelImage'], $fileName);
                 }
 
@@ -63,6 +64,10 @@ class ProcessEditHotelForm
 
         } catch (Exception $exception) {
             Log::error($exception);
+        }
+        catch (HotelNotFoundException $exception) {
+            return view('Exception.hotel-not-found', ['error' => $exception->getMessage()]);
+
         }
     }
 

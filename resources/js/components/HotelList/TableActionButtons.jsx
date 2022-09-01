@@ -27,7 +27,6 @@ class TableActionButtons extends Component {
         let self = this;
         axios.get(`home/view-hotel/${id}`).then(
             function (response) {
-                console.log(response)
                 self.setState({
                     hotelName: response.data.hotelDetails.hotel_name,
                     hotelAddress: response.data.hotelDetails.address,

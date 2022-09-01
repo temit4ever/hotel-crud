@@ -2,9 +2,11 @@
 
 namespace App\Repositories;
 
+use App\Exceptions\HotelNotFoundException;
 use App\Interfaces\HotelRepositoryInterface;
 use App\Models\Hotel;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 
@@ -30,15 +32,16 @@ class HotelRepository implements HotelRepositoryInterface
      * Get a specific hotel record
      * @param $id
      * @return object
+     * @throws HotelNotFoundException
      */
     public function getHotel($id = null): object
     {
-        try {
-            return Hotel::findOrFail($id);
+        $hotel = Hotel::find($id);
+        if (!$hotel) {
+            throw new HotelNotFoundException("The Hotel with id $id was nt found");
         }
-        catch (Exception $e) {
-            Log::error($e);
-        }
+
+        return $hotel;
     }
 
     /**

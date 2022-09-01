@@ -3,11 +3,6 @@ import React, { Component } from 'react';
 class ViewModal extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            lat: null,
-            long: null,
-            address: null
-        }
     }
 
     render() {

@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Actions\Hotel;
+use App\Exceptions\HotelNotFoundException;
 use App\Interfaces\HotelRepositoryInterface;
-use App\Models\Hotel;
 use Lorisleiva\Actions\Concerns\AsAction;
 
 /**
@@ -17,9 +17,14 @@ class ViewHotel
     }
     public  function handle(int $id)
     {
-        return [
-            'hotelDetails' => $this->hotelRepository->getHotel($id),
-        ];
+        try {
+            return [
+                'hotelDetails' => $this->hotelRepository->getHotel($id),
+            ];
+        }
+        catch (HotelNotFoundException $exception) {
+            return view('Exception.hotel-not-found', ['error' => $exception->getMessage()]);
+        }
     }
 
     public function asController(int $id)
@@ -27,7 +32,7 @@ class ViewHotel
        return $this->handle($id);
     }
 
-    public function jsonResponse(array $data)
+    public function jsonResponse(mixed $data)
     {
         return response()->json($data);
     }

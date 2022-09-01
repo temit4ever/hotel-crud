@@ -162,6 +162,7 @@ export default function EditHotelDetails(props) {
                                         <option value="Grand Cayman">Grand Cayman</option>
                                         <option value="Halkidiki">Halkidiki</option>
                                         <option value="Hong Kong">Hong Kong</option>
+                                        <option value="Lagos">Lagos</option>
                                         <option value="London">London</option>
                                         <option value="Miami">Miami</option>
                                         <option value="Monte Carlo">Monte Carlo</option>

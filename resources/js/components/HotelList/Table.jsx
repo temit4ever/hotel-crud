@@ -23,7 +23,6 @@ class Table extends Component {
         let self = this;
         axios.get('home/hotel-lists').then(
             function (response) {
-                console.log(response);
                 self.setState({
                     hotels: response.data.hotels
                 })
