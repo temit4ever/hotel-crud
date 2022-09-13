@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\EmailNotification;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,7 +16,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // use the command queue:work to run the job queue to send email notification when admin add/update hotel.
+        $schedule->command('queue:work')->everyMinute();
     }
 
     /**
