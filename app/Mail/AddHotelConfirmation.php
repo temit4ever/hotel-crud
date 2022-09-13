@@ -3,10 +3,11 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class AddHotelConfirmation extends Mailable
+class AddHotelConfirmation extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -29,7 +30,7 @@ class AddHotelConfirmation extends Mailable
         return $this
             ->from('tems@test.com')
             ->to('super-admin@test.com')
-            ->subject('Admin ' . auth()->user()->name . ' added item with id ' . $this->hotel->id)
+            ->subject('Admin added item with id ' . $this->hotel->id)
             ->markdown('hotel-confirmation-mail.hotel-add-confirmation',
                 [
                     'hotel' => $this->hotel
