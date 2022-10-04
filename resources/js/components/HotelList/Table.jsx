@@ -28,6 +28,9 @@ class Table extends Component {
                 })
             }
         )
+            .catch((error) => {
+                console.log(error)
+            })
     }
     render() {
         return (
@@ -45,9 +48,10 @@ class Table extends Component {
                         </tr>
                         </thead>
                         <tbody>
-                        {this.state.hotels.map(function(value, index) {
-                           return <TableRow key={index} hotel={value} />
-                        })}
+                       {(this.state.hotels !== null) ?
+                                this.state.hotels.map((value, index) => {
+                            return <TableRow key={index} hotel={value} />;
+                        }) : <tr><td>No Hotel Found</td></tr>}
                         </tbody>
                     </table>
                 </div>

@@ -20,7 +20,13 @@ class ProcessDeleteHotel
     }
     public function handle($id)
     {
-        return $this->hotelRepository->deleteHotel($id);
+        try {
+            return $this->hotelRepository->deleteHotel($id);
+        }
+        catch (Exception $exception)
+        {
+            Log::error($exception);
+        }
     }
 
     public function asController($id)
