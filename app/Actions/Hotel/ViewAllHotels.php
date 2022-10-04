@@ -2,7 +2,8 @@
 
 namespace App\Actions\Hotel;
 use App\Interfaces\HotelRepositoryInterface;
-use App\Repositories\HotelRepository;
+use Exception;
+use Illuminate\Support\Facades\Log;
 use Lorisleiva\Actions\Concerns\AsAction;
 
 
@@ -13,16 +14,19 @@ class ViewAllHotels
 {
     use AsAction;
 
-    public function __construct(protected HotelRepositoryInterface $hotelRepository)
-    {
+    public function __construct(protected HotelRepositoryInterface $hotelRepository){}
 
-    }
-    public function handle()
+    public function handle(): ?array
     {
-        return ['hotels' => $this->hotelRepository->getHotels()];
+        try {
+            return ['hotels' => $this->hotelRepository?->getHotels()];
+        }
+        catch (Exception $e) {
+            Log::error($e);
+        }
     }
 
-    public function jsonResponse(array $data)
+    public function jsonResponse(?array $data): \Illuminate\Http\JsonResponse
     {
         return response()->json($data);
     }
