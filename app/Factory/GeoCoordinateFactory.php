@@ -2,8 +2,8 @@
 
 namespace App\Factory;
 
-use Exception;
 use Illuminate\Support\Facades\Log;
+use Spatie\Geocoder\Exceptions\CouldNotGeocode;
 use Spatie\Geocoder\Facades\Geocoder;
 
 class GeoCoordinateFactory
@@ -17,8 +17,9 @@ class GeoCoordinateFactory
         try {
             return Geocoder::getCoordinatesForAddress($this->address);
         }
-        catch (Exception $exception) {
+        catch (CouldNotGeocode $exception) {
             Log::error($exception);
+            throw new \Error($exception->getMessage());
         }
     }
 }
