@@ -48,7 +48,7 @@ class Table extends Component {
                         </tr>
                         </thead>
                         <tbody>
-                       {(this.state.hotels !== null) ?
+                       {(this.state.hotels.length !== 0) ?
                                 this.state.hotels.map((value, index) => {
                             return <TableRow key={index} hotel={value} />;
                         }) : <tr><td>No Hotel Found</td></tr>}

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
+use Spatie\Geocoder\Exceptions\CouldNotGeocode;
 
 /**
  * Add record to the Hotel database
@@ -25,8 +26,8 @@ class ProcessAddHotelForm
     {
         $data = $request->validated();
         $imageName = 'default.jpeg';
+        $cord = Coordinates::create($request->hotelAddress)->getCoordinate();
         try {
-            $cord = Coordinates::create($request->hotelAddress)->getCoordinate();
             $hotel = Hotel::create([
                 'hotel_name' => $data['hotelName'],
                 'city' => $data['hotelCity'],
