@@ -25,7 +25,7 @@ class HotelEdited
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
-    public function broadcastOn()
+    public function broadcastOn(): \Illuminate\Broadcasting\Channel|PrivateChannel|array
     {
         return new PrivateChannel('channel-name');
     }

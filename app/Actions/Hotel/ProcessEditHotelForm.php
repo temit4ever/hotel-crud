@@ -11,7 +11,6 @@ use Exception;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -58,6 +57,7 @@ class ProcessEditHotelForm
                     'latitude' => $cord['lng'],
                 ]);
             }
+
             // Dispatch event
             HotelEdited::dispatch($hotelData);
             return ['message' => 'Hotel details updated successfully'];
