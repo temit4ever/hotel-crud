@@ -27,11 +27,11 @@ class HotelEditedConfirmation extends Mailable implements ShouldQueue
      *
      * @return $this
      */
-    public function build()
+    public function build(): static
     {
         return $this
-            ->from('tems@test.com', 'Tems Admin')
-            ->to('super-admin@test.com')
+            ->from(config('mail.from.address'), 'Tems Admin')
+            ->to(config('mail.to.address'))
             ->subject('Admin ' . 'updated item with id ' . $this->hotel->id)
             ->markdown('hotel-confirmation-mail.hotel-edit-confirmation', ['hotel' => $this->hotel]);
     }
