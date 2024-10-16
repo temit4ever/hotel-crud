@@ -24,7 +24,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/welcome', function () {
-    phpinfo();
     return view('welcome');
 });
 
